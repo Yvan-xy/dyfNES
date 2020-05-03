@@ -1,5 +1,0 @@
-[/home/code/solo/rubbish/dyfNES/src/romparser.cpp:31] ROM path is ./Super_mario_brothers.nes
-[/home/code/solo/rubbish/dyfNES/src/romparser.cpp:45] PRG-ROM Banks is 2
-[/home/code/solo/rubbish/dyfNES/src/romparser.cpp:48] CHR-ROM Banks is 1
-[/home/code/solo/rubbish/dyfNES/src/romparser.cpp:56] ROM is NTSC compatible.
-[/home/code/solo/rubbish/dyfNES/src/mem.cpp:18] Banks 2

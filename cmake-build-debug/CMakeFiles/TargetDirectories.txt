@@ -1,3 +1,0 @@
-/home/code/solo/rubbish/dyfNES/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/code/solo/rubbish/dyfNES/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/code/solo/rubbish/dyfNES/cmake-build-debug/CMakeFiles/dyfNES.dir
