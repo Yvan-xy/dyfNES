@@ -1,0 +1,7 @@
+/home/Hammer/Develop/Clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/code/solo/rubbish/dyfNES
+-- source -> /home/code/solo/rubbish/dyfNES/src
+-- include -> /home/code/solo/rubbish/dyfNES/include
+-- source -> /home/code/solo/rubbish/dyfNES/src/cpu.cpp;/home/code/solo/rubbish/dyfNES/src/log.cpp;/home/code/solo/rubbish/dyfNES/src/mem.cpp;/home/code/solo/rubbish/dyfNES/src/romparser.cpp;/home/code/solo/rubbish/dyfNES/src/tester.cpp
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/code/solo/rubbish/dyfNES/cmake-build-debug

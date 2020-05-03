@@ -1,0 +1,1 @@
+/bin/c++  -g   CMakeFiles/dyfNES.dir/main.cpp.o CMakeFiles/dyfNES.dir/src/cpu.cpp.o CMakeFiles/dyfNES.dir/src/log.cpp.o CMakeFiles/dyfNES.dir/src/mem.cpp.o CMakeFiles/dyfNES.dir/src/romparser.cpp.o CMakeFiles/dyfNES.dir/src/tester.cpp.o  -o dyfNES 
