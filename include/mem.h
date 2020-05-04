@@ -13,15 +13,27 @@ namespace dyfNES {
     const int MEMORY_SIZE = 0x10000;
 
     using Byte = std::uint8_t;
+    using Word = std::uint16_t;
     using Address = std::uint16_t;
 
     class Mem {
     public:
         Mem();
+
         ~Mem();
+
         void loadPRGROM(std::vector<Byte> &);
+
+        Byte readByte(Address);
+
+        Byte readWord(Address);
+
+        Byte writeByte(Address, Byte);
+
     private:
         std::vector<Byte> data;
+
+        Address getRealAddress(Address);
     };
 }
 

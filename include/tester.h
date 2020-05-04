@@ -15,6 +15,8 @@ namespace dyfNES {
         void romparserTester();
 
         void memTester();
+
+        void CPUTester();
     };
 }
 

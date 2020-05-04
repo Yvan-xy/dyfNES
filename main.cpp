@@ -14,7 +14,7 @@ int main() {
     dyfNES::Log::get().setLevel(dyfNES::Info);
 
     dyfNES::Tester tester;
-    tester.memTester();
+    tester.CPUTester();
 
     return 0;
 }

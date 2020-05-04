@@ -10,6 +10,7 @@
 #include <fstream>
 #include <memory>
 #include <cstring>
+#include <config.h>
 
 #ifndef __FILENAME__
 #define __FILENAME__ __FILE__
