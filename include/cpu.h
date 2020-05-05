@@ -16,6 +16,15 @@ namespace dyfNES {
     enum Flag {
         C = 0, Z, I, D, B, _, V, N
     };
+
+    enum InterruptType {
+        InterruptTypeNone,  //
+        InterruptTypeBreak, //
+        InterruptTypeIRQs,  //
+        InterruptTypeNMI,   //
+        InterruptTypeReset  //
+    };
+
     enum IORegisters {
         PPUCTRL = 0x2000,
         PPUMASK,
@@ -42,12 +51,52 @@ namespace dyfNES {
 
         uint16_t getOperand(OpcodeInfo &, Address &);
 
+        // Set PSW
+        inline void SetCarry(int flag) { PSW[C] = (flag != 0); };
+
+        inline void SetDecimal(int flag) { PSW[D] = (flag != 0); };
+
+        inline void SetInterrupt(int flag) { PSW[I] = (flag != 0); };
+
+        inline void SetSign(int flag) { PSW[N] = (flag != 0); };
+
+        inline void SetZero(int flag) { PSW[Z] = (flag != 0); };
+
+        inline void SetOverflow(int flag) { PSW[V] = (flag != 0); };
+
+        // Get PWS
+        inline bool GetCarry() const { return PSW[C]; }
+
+        inline bool GetDecimal() const { return PSW[D]; }
+
+        inline bool GetInterrupt() const { return PSW[I]; }
+
+        inline bool GetSign() const { return PSW[N]; }
+
+        inline bool GetZero() const { return PSW[Z]; }
+
+        inline bool GetOverflow() const { return PSW[V]; }
+
+        // Fetch relative address
+        inline Address RelativeAddress(Address base, Byte offset) { return base + offset; };
+
+        inline Address GetInterruptHandler(InterruptType);
+
+        void step();
+
+#ifdef CPU_LOG
+
+        void info();
+
+#endif
+
     private:
         /* Common register */
         Byte A{};
         Byte X{};
         Byte Y{};
-        Byte PSW{};
+        bool PSW[8];
+
 
         Byte SP{};    // Stack pointer
         Address PC{}; // Program counter
