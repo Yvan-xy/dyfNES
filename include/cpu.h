@@ -78,11 +78,17 @@ namespace dyfNES {
         inline bool GetOverflow() const { return PSW[V]; }
 
         // Fetch relative address
-        inline Address RelativeAddress(Address base, Byte offset) { return base + offset; };
+        inline Address RelativeAddress(Address base, Byte offset) { return base + int8_t(offset); };
 
         inline Address GetInterruptHandler(InterruptType);
 
+        void pushStack(Byte);
+
+        Byte popStack();
+
         void step();
+
+        void Interrupt(InterruptType);
 
 #ifdef CPU_LOG
 

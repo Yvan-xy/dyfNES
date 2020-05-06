@@ -26,7 +26,7 @@ namespace dyfNES {
 
         Byte readByte(Address);
 
-        Byte readWord(Address);
+        Word readWord(Address);
 
         Byte writeByte(Address, Byte);
 

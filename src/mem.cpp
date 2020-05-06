@@ -24,10 +24,10 @@ namespace dyfNES {
             }
         }
 
-        for (int i = 0x8000; i < MEMORY_SIZE; i++) {
-            std::cout << "0x" << std::hex << int(this->data[i]) << " ";
-        }
-        std::cout << std::endl;
+//        for (int i = 0x8000; i < MEMORY_SIZE; i++) {
+//            std::cout << "0x" << std::hex << int(this->data[i]) << " ";
+//        }
+//        std::cout << std::endl;
     }
 
     /**
@@ -56,7 +56,7 @@ namespace dyfNES {
         if (addr < 0x2000) {
             return this->data[addr];
         } else {
-            LOG(Error) << "Not support read 0x" << std::hex << int(addr) << " yet!" << std::endl;
+//            LOG(Error) << "Not support read 0x" << std::hex << int(addr) << " yet!" << std::endl;
             return this->data[addr];
         }
         return 0;
@@ -68,6 +68,7 @@ namespace dyfNES {
             this->data[addr] = value;
         } else {
             LOG(Error) << "Not support write 0x" << std::hex << int(addr) << "yet!" << std::endl;
+            this->data[addr] = value;
         }
         return 0;
     }
@@ -81,7 +82,7 @@ namespace dyfNES {
         return address;
     }
 
-    Byte Mem::readWord(Address address) {
+    Word Mem::readWord(Address address) {
         address = this->getRealAddress(address);
         return (this->data[address] | (this->data[address + 1] << 8));
     }

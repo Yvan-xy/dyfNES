@@ -61,10 +61,10 @@ namespace dyfNES {
             return false;
         }
 
-        for (auto i : this->PRG_ROM) {
-            std::cout << "0x" << std::hex << int(i) << " ";
-        }
-        std::cout<<std::endl;
+//        for (auto i : this->PRG_ROM) {
+//            std::cout << "0x" << std::hex << int(i) << " ";
+//        }
+//        std::cout<<std::endl;
 
         if (!vbanks)
             LOG(Info) << "Cartridge with CHR-RAM" << std::endl;

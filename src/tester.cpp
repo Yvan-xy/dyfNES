@@ -47,8 +47,7 @@ namespace dyfNES {
         Address resetAddr = cpu->readAddress(0xfffc);
         std::cout << "Reset vector is 0x" << std::hex << int(resetAddr) << std::endl;
         cpu->reset();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 20; i++)
             cpu->step();
-        cpu->info();
     }
 }
