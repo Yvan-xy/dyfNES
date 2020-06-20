@@ -46,6 +46,23 @@ namespace dyfNES {
         AddressingMode mode = opcodeInfo.mode;
         operand = this->getOperand(opcodeInfo, address);
 
+#ifdef CPU_LOG
+        int psw = PSW[N] << 7 |
+                  PSW[V] << 6 |
+                  1 << 5 |
+                  PSW[D] << 3 |
+                  PSW[I] << 2 |
+                  PSW[Z] << 1 |
+                  PSW[C];
+//        this->info();
+        LOG(Info) << "\nName -> " << opcodeInfo.name << "\n"
+                  << "opcode -> 0x" << std::hex << int(opcode) << "\n"
+                  << "opcodeLength -> " << opcodeInfo.opcodeLength << "\n"
+                  << "operand -> 0x" << std::hex << int(operand) << "\n"
+                  << "address -> 0x" << std::hex << int(address) << "\n"
+                  << "flags -> " << psw << "\n" << std::endl;
+#endif
+
 
         switch (type) {
             case ADC: {     // ADC -> A + M + C
@@ -226,10 +243,12 @@ namespace dyfNES {
             case JSR: {
                 pushStack(static_cast<Byte>((PC - 1) >> 8));
                 pushStack(static_cast<Byte>(PC - 1));
+                this->PC = address;
                 break;
             }
             case LDA: {
-                A = operand;
+                this->A = operand;
+                LOG(Info) << "A -> 0x" << std::hex << int(A) << std::endl;
                 SetZero(!A);
                 SetSign(A & 0x80);
                 break;
@@ -369,9 +388,10 @@ namespace dyfNES {
             }
             case SEI: {
                 SetInterrupt(1);
+                break;
             }
             case STA: {
-                LOG(Info) << "Address in sta -> " << address << std::endl;
+                LOG(Info) << "Address in sta -> 0x" << std::hex << int(address) << std::endl;
                 this->mem.writeByte(address, A);
                 break;
             }
@@ -417,22 +437,7 @@ namespace dyfNES {
                 break;
             }
         }
-#ifdef CPU_LOG
-        int psw = PSW[N] << 7 |
-                  PSW[V] << 6 |
-                  1 << 5 |
-                  PSW[D] << 3 |
-                  PSW[I] << 2 |
-                  PSW[Z] << 1 |
-                  PSW[C];
-        this->info();
-        LOG(Info) << "\nName -> " << opcodeInfo.name << "\n"
-                  << "opcode -> 0x" << std::hex << int(opcode) << "\n"
-                  << "opcodeLength -> " << opcodeInfo.opcodeLength << "\n"
-                  << "operand -> 0x" << std::hex << int(operand) << "\n"
-                  << "address -> 0x" << std::hex << int(address) << "\n"
-                  << "flags -> " << psw << "\n" << std::endl;
-#endif
+
     }
 
     uint16_t CPU::getOperand(OpcodeInfo &opcodeInfo, Address &address) {
@@ -541,6 +546,7 @@ namespace dyfNES {
     }
 
     void CPU::step() {
+        this->info();
         Byte opcode = this->mem.readByte(PC++);
         runOpcode(opcode);
     }

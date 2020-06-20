@@ -3,7 +3,10 @@ project(dyfNES)
 
 set(CMAKE_CXX_STANDARD 14)
 set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+
 set (CPU_LOG "1")
+set (OFF "0")
+
 include_directories(${PROJECT_INCLUDE_DIR})
 
 message(STATUS "source -> ${PROJECT_SOURCE_DIR}/src")

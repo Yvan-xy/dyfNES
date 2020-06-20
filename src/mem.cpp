@@ -13,6 +13,13 @@ namespace dyfNES {
 
     Mem::~Mem() {}
 
+    /*
+     *  @param std::vector<Byte> &PGR_ROM
+     *
+     *  Load PGR_ROM into CPU memory.
+     *  If banks == 1 then load it into 0x8000 - 0xbffff
+     *  and mirror it from 0xc000 to  0xffff
+     */
     void Mem::loadPRGROM(std::vector<Byte> &PGR_ROM) {
         int banks = PGR_ROM.size() / 0x4000;
         for (int i = 0; i < PGR_ROM.size(); i++) {
@@ -24,10 +31,13 @@ namespace dyfNES {
             }
         }
 
+#ifdef CPU_LOG
 //        for (int i = 0x8000; i < MEMORY_SIZE; i++) {
 //            std::cout << "0x" << std::hex << int(this->data[i]) << " ";
 //        }
 //        std::cout << std::endl;
+#endif
+
     }
 
     /**
@@ -52,7 +62,10 @@ namespace dyfNES {
     +---------+-------+-------+-----------------------+
      */
     Byte Mem::readByte(Address address) {
+        // 0x0800 ~ 0x1fff is mirror of 0x0000 ~ 0x07ff
+        // 0x2008 ~ 0x401f is mirror os 0x2000 ~ 0x2007
         Address addr = this->getRealAddress(address);
+
         if (addr < 0x2000) {
             return this->data[addr];
         } else {
@@ -67,7 +80,7 @@ namespace dyfNES {
         if (addr < 0x2000) {
             this->data[addr] = value;
         } else {
-            LOG(Error) << "Not support write 0x" << std::hex << int(addr) << "yet!" << std::endl;
+//            LOG(Error) << "Not support write 0x" << std::hex << int(addr) << "yet!" << std::endl;
             this->data[addr] = value;
         }
         return 0;

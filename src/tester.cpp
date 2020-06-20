@@ -37,9 +37,14 @@ namespace dyfNES {
     void Tester::CPUTester() {
         Mem *mem = new Mem();
 
-        const char *path = "./Super_mario_brothers.nes";
+        const std::string path = "./1.Branch_Basics.nes";
+
         ROMParser romParser;
-        romParser.loadRom(path);
+        int result = romParser.loadRom(path);
+        if (!result) {
+            LOG(Error) << "Read ROM Status is " << result << std::endl;
+        }
+//        exit(0);
 
         std::vector<Byte> PRG_ROM = romParser.getROM();
         mem->loadPRGROM(PRG_ROM);
@@ -47,7 +52,7 @@ namespace dyfNES {
         Address resetAddr = cpu->readAddress(0xfffc);
         std::cout << "Reset vector is 0x" << std::hex << int(resetAddr) << std::endl;
         cpu->reset();
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 40; i++)
             cpu->step();
     }
 }

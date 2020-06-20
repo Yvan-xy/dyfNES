@@ -33,6 +33,7 @@ namespace dyfNES {
         header.resize(16);
         if (!romFile.read(reinterpret_cast<char *>(&header[0]), 16)) {
             LOG(Error) << "Read NES Header Failed" << std::endl;
+//            LOG(Info) << "HHHHHHHH" << std::endl;
             return false;
         }
 
@@ -61,10 +62,13 @@ namespace dyfNES {
             return false;
         }
 
-//        for (auto i : this->PRG_ROM) {
-//            std::cout << "0x" << std::hex << int(i) << " ";
-//        }
-//        std::cout<<std::endl;
+#if OFF
+        LOG(Info);
+        for (auto i : this->PRG_ROM) {
+            std::cout << "0x" << std::hex << int(i) << " ";
+        }
+        std::cout << std::endl;
+#endif
 
         if (!vbanks)
             LOG(Info) << "Cartridge with CHR-RAM" << std::endl;

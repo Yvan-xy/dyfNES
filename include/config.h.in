@@ -2,5 +2,6 @@
 #define CONFIG_H
 
 #define CPU_LOG @CPU_LOG@
+#define OFF @OFF@
 
 #endif  // config.h
